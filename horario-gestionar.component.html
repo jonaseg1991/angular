@@ -1,0 +1,72 @@
+<form (ngSubmit)="onSubmit()" 
+      class="form-horizontal" 
+      role="form"
+      [id]="entidad+'GestionarForm'">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{tipo}} {{titulo}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label 
+                for="desde" 
+                class="col-sm-3 control-label">Desde</label>
+            <div class="col-sm-9">
+                <input 
+                type="text" 
+                name="tiempodesde"
+                class="form-control tiempo" 
+                [id]="'tiempodesde'+tipo"
+                [(ngModel)]="Item.horaDesde"
+                [disabled]="tipo == 'Detalle' ? true : null"
+                #tiempodesde="ngModel"
+                required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label 
+                for="hasta" 
+                class="col-sm-3 control-label">Hasta</label>
+                <div class="col-sm-9">
+                    <input 
+                    type="text" 
+                    name="tiempohasta"
+                    class="form-control tiempo" 
+                    [id]="'tiempohasta'+tipo"
+                    [(ngModel)]="Item.horaHasta"
+                    [disabled]="tipo == 'Detalle' ? true : null"
+                    #tiempohasta="ngModel"
+
+                    required/>
+                </div>
+        </div>
+        <div class="form-group">
+            <label 
+                for="dia" 
+                class="col-sm-3 control-label">Dia</label>
+            <div class="col-sm-9">
+                <select 
+                    class="form-control"
+                    name="dia"
+                    id="dia2"
+                    [(ngModel)]="Item.dia"
+                    [disabled]="tipo == 'Detalle' ? true : null"
+                    >
+                    <option 
+                        *ngFor="let item of DiaSemana" 
+                        [value]="item.dia"
+                        >
+                        {{item.name}}
+                    </option>
+                </select>
+            </div>
+        </div>   
+    </div>  
+
+    <div class="modal-footer">
+        <input type="submit" 
+               value="{{tipo}} {{titulo}}" 
+               class="btn btn-success pull-right" 
+               *ngIf="tipo != 'Detalle'" />
+    </div>
+</form>
